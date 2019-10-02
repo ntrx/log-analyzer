@@ -11,16 +11,15 @@ from PyQt5.QtCore import pyqtSlot
 from analyzer import Ui_MainWindow
 from xlsxwriter import Workbook  # before import xlswriter
 from os import path
-import os
 import struct
 import math
 
 struct_file = "log1.dat"
 xls_name = "log-export.xlsx"
 
-elements = 45
+elements = 100
 max_elements = int(elements)
-max_sessions = (int(elements*2)+int(elements*2)+int(elements*2))*3
+max_sessions = max_elements*10
 
 data_type = ["" for i in range(max_elements)]
 data_name = ["" for i in range(max_elements)]
@@ -52,7 +51,6 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         self.pushButton.clicked.connect(self.on_list_clicked)  # button 'EXTRACT' push all code to Excel
         self.pushButton_4.clicked.connect(self.on_list_clear)  # button 'NONE' clear all selection on lists
         self.pushButton_2.clicked.connect(self.on_list_all)  # button 'ALL' select all fields in both lists
-        self.pushButton_3.clicked.connect(self.on_list_run)  # button 'RUN' extract and run simultaneously
         self.pushButton_5.clicked.connect(self.on_button_open)
 
     def load_file(self):
@@ -62,7 +60,6 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         global data_print
         global data_view
         global data_sessions_print
-
         global data_values_sessions
 
         self.label_5.setVisible(True)
@@ -300,16 +297,8 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         self.load_file()
 
     @pyqtSlot()
-    def on_list_run(self):
-        self.on_list_clicked()
-        if len(self.listView.selectedIndexes()) == 0 or len(self.listView_2.selectedIndexes()) == 0:
-            return
-        os.system('start excel.exe "%s"' % xls_name)
-
-    @pyqtSlot()
     def on_list_all(self):
         self.listView.selectAll()
-        self.listView_2.selectAll()
 
     @pyqtSlot()
     def on_list_clear(self):
@@ -375,11 +364,11 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         self.progressBar.setValue(int(100))
         print("bye")
         self.textBrowser.setVisible(True)
-        self.pushButton_3.setEnabled(False)
         if error == 1:
             self.label_5.setText("File corrupted, finished with errors")
         else:
             self.label_5.setText("No errors found.")
+        data_sessions_print = ["0" for i in range(max_sessions - 1)]
 
 
 if __name__ == '__main__':
