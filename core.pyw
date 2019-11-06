@@ -203,18 +203,20 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                     data_values[k][i] = char_id
 
                 if data_type[i] == "double":
-                    binary_id = struct.unpack_from('d', byte_arr)[0]
-                    if math.isnan(binary_id):
-                        binary_id = -1
-                        error = 1
-                    data_values[k][i] = binary_id
+                    if len(byte_arr) > 0:
+                        binary_id = struct.unpack_from('d', byte_arr)[0]
+                        if math.isnan(binary_id):
+                            binary_id = -1
+                            error = 1
+                        data_values[k][i] = binary_id
 
                 if data_type[i] == "float":
-                    binary_id = struct.unpack_from('f', byte_arr)[0]
-                    if math.isnan(binary_id):
-                        binary_id = -1
-                        error = 1
-                    data_values[k][i] = binary_id
+                    if len(byte_arr) > 0:
+                        binary_id = struct.unpack_from('f', byte_arr)[0]
+                        if math.isnan(binary_id):
+                            binary_id = -1
+                            error = 1
+                        data_values[k][i] = binary_id
 
         fp.close()
         self.progressBar.setValue(75)
