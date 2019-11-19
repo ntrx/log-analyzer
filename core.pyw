@@ -14,6 +14,10 @@ from os import path
 import struct
 import math
 
+PROG_NAME = "Log Analyzer"
+VERSION = "1.3.1"
+RELEASE = "beta"
+
 struct_file = "log1.dat"
 xls_name = "log-export.xlsx"
 
@@ -35,6 +39,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         QtWidgets.QMainWindow.__init__(self)
         self.setupUi(self)
+        self.setWindowTitle("%s %s %s" % (PROG_NAME, VERSION, RELEASE))
 
         # init text labels and 'end' panel
         self.label.setText("Select fields to be extracted")
@@ -248,7 +253,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                 session_records += 1
             print("records found: %d" % session_records)
             print("Session %d ended at %s" % (i, data_values[data_values_sessions[i][1] - 1][5]))
-            data_sessions[i] = "launch " + str(i) + " at " + data_values[data_values_sessions[i][0]][4] + " " + \
+            data_sessions[i] = str(i) + " at " + data_values[data_values_sessions[i][0]][4] + " " + \
                                data_values[data_values_sessions[i][1] - 1][5] + " recs " + str(session_records)
         self.progressBar.setValue(90)
         list_of_fields = list(data_view)
@@ -376,6 +381,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle("Fusion")
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())

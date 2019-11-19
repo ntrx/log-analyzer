@@ -78,7 +78,7 @@ def clear_32():
 
 def install_modules():
     os.system("pip install pyqt5")
-    os.system("pip install xlswriter")
+    os.system("pip install xlsxwriter")
     os.system("pip install pyinstaller")
 
 def translate():
@@ -99,9 +99,9 @@ def main():
             print('  * auto - perform translate UI - make default - clear default')
         if sys.argv[1] == 'make':
             if sys.argv[2] == '32':
-                make_32("--noconsole")
+                make_32("--noconsole --onefile")
             if sys.argv[2] == '64':
-                make_64("--noconsole")
+                make_64("--noconsole --onefile")
         if sys.argv[1] == 'clear':
             if sys.argv[2] == '32':
                 clear_32()
