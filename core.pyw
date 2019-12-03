@@ -13,13 +13,15 @@ from xlsxwriter import Workbook  # before import xlswriter
 from os import path
 import struct
 import math
+from datetime import datetime
 
 PROG_NAME = "Log Analyzer"
 VERSION = "1.3.1"
 RELEASE = "beta"
 
 struct_file = "log1.dat"
-xls_name = "log-export.xlsx"
+xls_name = "log-export"
+xls_format = ".xlsx"
 
 elements = 100
 max_elements = int(elements)
@@ -323,8 +325,10 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         self.textBrowser_3.setVisible(False)
         self.progressBar.setVisible(True)
         # self.progressBar.value(0)
-
-        wbook = Workbook(xls_name)
+        today = datetime.now()
+        wbook_date = today.strftime("%y-%m-%d-%H-%M")
+        wbook_name = xls_name+"-"+wbook_date+xls_format
+        wbook = Workbook(wbook_name)
         wsheet = wbook.add_worksheet()
         itms = self.listView.selectedIndexes()
         for it in itms:
