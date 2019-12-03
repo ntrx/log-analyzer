@@ -272,7 +272,8 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
             model2.appendRow(item)
         self.label_4.setText("Selected: %d of %d" % (0, max_sessions))
         self.progressBar.setValue(100)
-        self.label_5.setText("Log loaded.")
+        successfull_load = "Log loaded. Fields="+str(dt_ind)+", sessions="+str(sessions_n)+", records="+str(records_n)
+        self.label_5.setText(successfull_load)
         self.progressBar.setValue(0)
 
         self.listView.selectionModel().selectionChanged.connect(self.elements_list_change)
@@ -354,16 +355,17 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
 
         row = 1
         xlsx_write = (sessions_n + 1) if (sessions_n + 1) < max_sessions else max_sessions
-        proc100 = float(xlsx_write)
+        record_counter = 0
         for i in range(xlsx_write):
             for cl_ind in range(int(data_values_sessions[i][0]), int(data_values_sessions[i][1])):
                 if data_sessions_print[i] == '1':
                     col = 0
+                    record_counter += 1
                     for rw_ind in range(dt_ind):
                         if data_print[rw_ind] == '1':
                             wsheet.write(row, col, data_values[cl_ind][rw_ind])
                             col += 1
-                            self.progressBar.setValue(int((int(i)/proc100)*100))
+                            self.progressBar.setValue(int((int(record_counter)/records_n)*100))
                     row += 1
         self.label_5.setVisible(True)
         self.label_5.setText("Saving file.")
