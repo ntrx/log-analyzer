@@ -347,6 +347,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
             return
 
         print("hello, its me")
+
         row = 0
         for rw_ind in range(dt_ind):
             if data_print[rw_ind] == '1':
@@ -359,6 +360,13 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
 
         row = 1
         xlsx_write = (sessions_n + 1) if (sessions_n + 1) < max_sessions else max_sessions
+
+        choosed_records = 0
+        for i in range(xlsx_write):
+            if data_sessions_print[i] == '1':
+                choosed_records += int(data_values_sessions[i][1])-int(data_values_sessions[i][0])
+        print("Records choosed for convert: ", choosed_records)
+
         record_counter = 0
         for i in range(xlsx_write):
             for cl_ind in range(int(data_values_sessions[i][0]), int(data_values_sessions[i][1])):
@@ -369,7 +377,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                         if data_print[rw_ind] == '1':
                             wsheet.write(row, col, data_values[cl_ind][rw_ind])
                             col += 1
-                            self.progressBar.setValue(int((int(record_counter)/records_n)*100))
+                            self.progressBar.setValue(int((int(record_counter)/choosed_records)*100))
                     row += 1
         self.label_5.setVisible(True)
         self.label_5.setText("Saving file.")
