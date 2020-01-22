@@ -17,7 +17,7 @@ from datetime import datetime
 
 PROG_NAME = "Log Analyzer"
 VERSION = "1.3.1"
-RELEASE = "rc1"
+RELEASE = "rc2"
 
 struct_file = "log1.dat"
 xls_name = "log-export"
