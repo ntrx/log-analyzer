@@ -380,6 +380,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                             self.progressBar.setValue(int((int(record_counter)/choosed_records)*100))
                     row += 1
         self.label_5.setVisible(True)
+        wsheet.autofilter(0, 0, i, dt_ind)
         self.label_5.setText("Saving file.")
         wbook.close()
         self.progressBar.setValue(int(100))
