@@ -18,6 +18,9 @@ def make_64(arguments):
 
 def make_32(arguments):
     os.system('%s --path %s --icon=loganalyzer.ico %s %s' % (pyinst_32, win32_dll, arguments, MAIN_FILE))
+
+def make(arguments):
+    os.system('pyinstaller --icon=loganalyzer.ico %s %s' % (arguments, MAIN_FILE))
     
 def clear_64():
     os.chdir("dist/core")
@@ -109,24 +112,23 @@ def main():
             print('Example type:')
             print('make.py make 64 --noconsole --onefile')
         if sys.argv[1] == 'make':
-            if sys.argv[2] == '32':
-                args = len(sys.argv)
-                if args > 2:
-                    arg_command = ""
-                    for i in range(3, args):
-                        arg_command += sys.argv[i] + " "
-                    make_32(arg_command)
-                else:
-                make_32("--noconsole --onefile")
-            if sys.argv[2] == '64':
-                args = len(sys.argv)
-                if args > 2:
-                    arg_command = ""
-                    for i in range(3, args):
-                        arg_command += sys.argv[i] + " "
-                    make_64(arg_command)
-                else:
-                make_64("--noconsole --onefile")
+            args = len(sys.argv)
+            if args > 2:
+                if sys.argv[2] == '32':
+                    if args > 2:
+                        arg_command = ""
+                        for i in range(3, args):
+                            arg_command += sys.argv[i] + " "
+                        make_32(arg_command)
+                elif sys.argv[2] == '64':
+                    if args > 2:
+                        arg_command = ""
+                        for i in range(3, args):
+                            arg_command += sys.argv[i] + " "
+                        make_64(arg_command)
+            # lazy version
+            elif args == 2:
+                make("")
         if sys.argv[1] == 'clear':
             if sys.argv[2] == '32':
                 clear_32()
@@ -138,8 +140,7 @@ def main():
             translate()
         if sys.argv[1] == 'auto':
             translate()
-            make_64("--noconsole --onefile")
-            clear_64()
+            make("--noconsole --onefile")
 
 if __name__ == '__main__':
     main()
