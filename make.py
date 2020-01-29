@@ -115,19 +115,23 @@ def main():
             args = len(sys.argv)
             if args > 2:
                 if sys.argv[2] == '32':
-                    if args > 2:
+                    if args > 3:
                         arg_command = ""
-                        for i in range(3, args):
-                            arg_command += sys.argv[i] + " "
+                        for argc in sys.argv:
+                            arg_command += argc + " "
                         make_32(arg_command)
+                    else:
+                        make_32("")
                 elif sys.argv[2] == '64':
-                    if args > 2:
+                    if args > 3:
                         arg_command = ""
-                        for i in range(3, args):
-                            arg_command += sys.argv[i] + " "
+                        for argc in sys.argv:
+                            arg_command += argc + " "
                         make_64(arg_command)
-            # lazy version
-            elif args == 2:
+                    else:
+                        make_64("")
+            else:
+                print("Proceed lazy make command")
                 make("")
         if sys.argv[1] == 'clear':
             if sys.argv[2] == '32':
