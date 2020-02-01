@@ -2,27 +2,63 @@ import os
 import sys
 import shutil
 
-## Arguments list:
-# --noconsole - hide console
-# --onefile    - portable file
-# --path *    - choose path
+#  Arguments list:
+#  --noconsole - hide console
+#  --onefile    - portable file
+#  --path *    - choose path
 
-MAIN_FILE = 'core.pyw'
-win32_dll = "\"C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\ucrt\\DLLs\\x86\""
-pyinst_32 = "C:\python37-low\Scripts\pyinstaller.exe"
-QT_XML = 'analyzer.ui'
-PY_XML = 'analyzer.py'
+MAIN_FILE = "" # 'core.py'
+win32_dll = "" #"\"C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\10.0.17763.0\\ucrt\\DLLs\\x86\""
+pyinst_32 = "" #"C:\python37-low\Scripts\pyinstaller.exe"
+QT_XML = "" #'pycontrol.ui'
+PY_XML = "" #'gui.py'
+PY_ICON = "" # icon file
+PY_MODULES = [] # list of required mofules for running 
+
 
 def make_64(arguments):
-    os.system('pyinstaller --icon=loganalyzer.ico %s %s' % (arguments, MAIN_FILE))
+    os.system('pyinstaller --icon=%s %s %s' % (PY_ICON, arguments, MAIN_FILE))
+
 
 def make_32(arguments):
-    os.system('%s --path %s --icon=loganalyzer.ico %s %s' % (pyinst_32, win32_dll, arguments, MAIN_FILE))
+    os.system('%s --path %s --icon=%s %s %s' % (pyinst_32, win32_dll, PY_ICON, arguments, MAIN_FILE))
 
 def make(arguments):
-    os.system('pyinstaller --icon=loganalyzer.ico %s %s' % (arguments, MAIN_FILE))
-    
+    os.system('pyinstaller --icon=%s %s %s' % (PY_ICON, arguments, MAIN_FILE))
+
 def clear_64():
+    os.chdir("dist/core")
+    shutil.rmtree("cryptography-2.7-py3.7.egg-info")
+    os.remove("PyQt5\\Qt\\bin\\d3dcompiler_47.dll")
+    os.remove("PyQt5\\Qt\\bin\\libEGL.dll")
+    os.remove("PyQt5\\Qt\\bin\\libGLESv2.dll")
+    os.remove("PyQt5\\Qt\\bin\\opengl32sw.dll")         
+    os.remove("PyQt5\\Qt\\plugins\\iconengines\\qsvgicon.dll")
+    shutil.rmtree("PyQt5\\Qt\\plugins\\imageformats")
+    os.remove("PyQt5\\Qt\\plugins\\platforms\\qminimal.dll")
+    os.remove("PyQt5\\Qt\\plugins\\platforms\\qoffscreen.dll")
+    os.remove("PyQt5\\Qt\\plugins\\platforms\\qwebgl.dll")
+    os.remove("PyQt5\\Qt\\plugins\\platformthemes\\qxdgdesktopportal.dll")
+    os.remove("PyQt5\\Qt\\plugins\\styles\\qwindowsvistastyle.dll")
+    shutil.rmtree("PyQt5\\Qt\\translations")
+    os.remove("libGLESv2.dll")
+    os.remove("MSVCP140.dll")
+    os.remove("Qt5DBus.dll")
+    os.remove("Qt5Network.dll")
+    os.remove("Qt5Qml.dll")
+    os.remove("Qt5Quick.dll")
+    os.remove("Qt5Svg.dll")
+    os.remove("Qt5WebSockets.dll")
+    os.remove("VCRUNTIME140.dll")
+    os.remove("_bz2.pyd")
+    os.remove("_ctypes.pyd")
+    os.remove("_decimal.pyd")
+    os.remove("_hashlib.pyd")
+    os.remove("_lzma.pyd")
+    os.remove("pyexpat.pyd")
+
+
+def clear_32():
     os.chdir("dist/core")
     os.remove("PyQt5\\Qt\\bin\\d3dcompiler_47.dll")
     os.remove("PyQt5\\Qt\\bin\\libEGL.dll")
@@ -34,7 +70,7 @@ def clear_64():
     os.remove("PyQt5\\Qt\\plugins\\platforms\\qoffscreen.dll")
     os.remove("PyQt5\\Qt\\plugins\\platforms\\qwebgl.dll")
     os.remove("PyQt5\\Qt\\plugins\\platformthemes\\qxdgdesktopportal.dll")
-   # os.remove("PyQt5\\Qt\\plugins\\styles\\qwindowsvistastyle.dll")
+    os.remove("PyQt5\\Qt\\plugins\\styles\\qwindowsvistastyle.dll")
     shutil.rmtree("PyQt5\\Qt\\translations")
     os.remove("libGLESv2.dll")
     os.remove("MSVCP140.dll")
@@ -46,53 +82,54 @@ def clear_64():
     os.remove("Qt5WebSockets.dll")
     os.remove("VCRUNTIME140.dll")
     os.remove("_bz2.pyd")
+    os.remove("_ctypes.pyd")
     os.remove("_decimal.pyd")
     os.remove("_hashlib.pyd")
     os.remove("_lzma.pyd")
     os.remove("pyexpat.pyd")
 
-def clear_32():
-    os.chdir("dist/core")
-    os.remove("PyQt5\\Qt\\bin\\libEGL.dll")
-    os.remove("PyQt5\\Qt\\bin\\libGLESv2.dll")
-    os.remove("PyQt5\\Qt\\bin\\opengl32sw.dll")         
-    os.remove("PyQt5\\Qt\\plugins\\iconengines\\qsvgicon.dll")
-    shutil.rmtree("PyQt5\\Qt\\plugins\\imageformats")
-    os.remove("PyQt5\\Qt\\plugins\\platforms\\qminimal.dll")
-    os.remove("PyQt5\\Qt\\plugins\\platforms\\qoffscreen.dll")
-    os.remove("PyQt5\\Qt\\plugins\\platforms\\qwebgl.dll")
-    os.remove("PyQt5\\Qt\\plugins\\platformthemes\\qxdgdesktopportal.dll")
-  #  os.remove("PyQt5\\Qt\\plugins\\styles\\qwindowsvistastyle.dll")
-    shutil.rmtree("PyQt5\\Qt\\translations")
-    os.remove("libGLESv2.dll")
-    os.remove("MSVCP140.dll")
-    os.remove("Qt5DBus.dll")
-    os.remove("Qt5Network.dll")
-    os.remove("Qt5Qml.dll")
-    os.remove("Qt5Quick.dll")
-    os.remove("Qt5Svg.dll")
-    os.remove("Qt5WebSockets.dll")
-    os.remove("VCRUNTIME140.dll")
-    os.remove("_bz2.pyd")
-    os.remove("_decimal.pyd")
-    os.remove("_hashlib.pyd")
-    os.remove("_lzma.pyd")
-    os.remove("pyexpat.pyd")
 
 def install_modules():
-    os.system("pip install pyqt5")
-    os.system("pip install xlsxwriter")
-    os.system("pip install pyinstaller")
+    for module in range(2, len(PY_MODULES)):
+        os.system("pip install %s" % PY_MODULES[module])
 
 def translate():
     if os.name == 'nt':
         os.system("python -m PyQt5.uic.pyuic %s -o %s" % (QT_XML, PY_XML))
-    else: # i think you have preinstalled python 2.7
+    else:  # i think you have preinstalled python 2.7
         os.system("python3 -m PyQt5.uic.pyuic %s -o %s" % (QT_XML, PY_XML))
 
 
-    
 def main():
+    global MAIN_FILE
+    global win32_dll
+    global QT_XML
+    global PY_XML
+    global pyinst_32
+    global PY_ICON
+    global PY_MODULES
+    if not os.path.exists('make.ini'):
+        print('Config file not found! Please create it file by yourself manually.')
+        return
+    with open('make.ini', 'rt+') as fp:
+        for line in fp:            
+            if line.find('main-file') == 0:
+                MAIN_FILE = get_value(line, len('main-file'))
+            if line.find('win32_dll') == 0:
+                win32_dll = get_value(line, len('win32_dll'))
+            if line.find('qt-xml-file') == 0:
+                QT_XML = get_value(line, len('qt-xml-file'))
+            if line.find('py-xml-file') == 0:
+                PY_XML = get_value(line, len('py-xml-file'))
+            if line.find('win32_pyinst') == 0:
+                pyinst_32 = get_value(line, len('win32_pyinst'))
+            if line.find('icon-file') == 0:
+                PY_ICON = get_value(line, len('icon-file'))
+            if line.find('depends') == 0:
+                PY_MODULES = get_depends(line)
+
+
+    fp.close()
     if len(sys.argv) <= 1:
         print("Not enough arguments. Type %s help" % sys.argv[0])
     else:
@@ -145,6 +182,26 @@ def main():
         if sys.argv[1] == 'auto':
             translate()
             make("--noconsole --onefile")
+
+def get_value(line, start):
+    value = ""
+    for i in range(start, len(line)):
+        if line[i] == " " and line[i+1] == "'":
+            j = i+2
+            while line[j] != "'":
+                value += line[j]
+                j += 1
+    return value
+	
+def get_depends(line):
+    '''
+    Returning string splited by space as string array
+    Usefull data is from 2 index
+    '''
+    depends_modules = []
+    for word in line.split():
+        depends_modules.append(word)
+    return depends_modules
 
 if __name__ == '__main__':
     main()

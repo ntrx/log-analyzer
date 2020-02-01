@@ -1,0 +1,16 @@
+
+*.exe
+*.bak
+*.dat
+*.xml
+*.iml
+*.pyc
+*.toc
+*.zip
+*.manifest
+*.pkg
+*.pyz
+*.txt
+*.html
+*.spec
+*.ini
