@@ -14,3 +14,6 @@
 *.html
 *.spec
 *.ini
+*.xlsx
+log-export
+.idea/.name
