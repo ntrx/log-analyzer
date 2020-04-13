@@ -1,6 +1,6 @@
 # #!/usr/bin/env python
 
-# python 3.7 last version 12:30 03072019
+# python 3.7 last version 09:15 13042020
 # use libs: PIP: pyqt5->pyiuc5 (for GUI
 # xlswriter (for EXCEL
 # pyinstaller (for executable
