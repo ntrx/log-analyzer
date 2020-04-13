@@ -17,7 +17,7 @@ from datetime import datetime
 
 PROG_NAME = "Log Analyzer"
 VERSION = "1.3.1"
-RELEASE = "rc2"
+RELEASE = "rc3"
 
 struct_file = "log1.dat"
 xls_name = "log-export"
@@ -207,7 +207,13 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                         if byte_arr[c] == 0x09:
                             break
                         char_id += chr(byte_arr[c])
-                    data_values[k][i] = char_id
+                    # Received issues that russian symbols is represend as kryakozyabry
+                    # Here is solving
+                    encoded_string = str(char_id.encode('utf-8'), encoding='cp866')
+                    if not char_id.isascii(): # If not only ascii then copy every second symbol
+                        data_values[k][i] = encoded_string[1:len(encoded_string)-1:2]
+                    else:
+                        data_values[k][i] = encoded_string
 
                 if data_type[i] == "double":
                     if len(byte_arr) > 0:
