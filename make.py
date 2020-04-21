@@ -11,6 +11,7 @@ import shutil
 MAIN_FILE = "" # 'core.py'
 win32_dll = "" #"\"C:\\Program Files (x86)\\Windows Kits\\10\\Redist\\10.0.17763.0\\ucrt\\DLLs\\x86\""
 pyinst_32 = "" #"C:\python37-low\Scripts\pyinstaller.exe"
+pyinst64 = ""
 QT_XML = "" #'pycontrol.ui'
 PY_XML = "" #'gui.py'
 PY_ICON = "" # icon file
@@ -18,7 +19,7 @@ PY_MODULES = [] # list of required mofules for running
 
 
 def make_64(arguments):
-    os.system('pyinstaller --icon=%s %s %s' % (PY_ICON, arguments, MAIN_FILE))
+    os.system('%s --icon=%s %s %s' % (pyinst_64, PY_ICON, arguments, MAIN_FILE))
 
 
 def make_32(arguments):
@@ -107,6 +108,7 @@ def main():
     global QT_XML
     global PY_XML
     global pyinst_32
+    global pyinst_64
     global PY_ICON
     global PY_MODULES
     if not os.path.exists('make.ini'):
@@ -124,6 +126,8 @@ def main():
                 PY_XML = get_value(line, len('py-xml-file'))
             if line.find('win32_pyinst') == 0:
                 pyinst_32 = get_value(line, len('win32_pyinst'))
+            if line.find('win64_pyinst') == 0:
+                pyinst_64 = get_value(line, len('win64_pyinst'))
             if line.find('icon-file') == 0:
                 PY_ICON = get_value(line, len('icon-file'))
             if line.find('depends') == 0:
