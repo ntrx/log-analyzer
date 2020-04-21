@@ -2,9 +2,10 @@
 
 # Form implementation generated from reading ui file 'analyzer.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.2
+# Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
+
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -141,5 +142,3 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "TextLabel"))
         self.progressBar.setFormat(_translate("MainWindow", "%p%"))
         self.pushButton_5.setText(_translate("MainWindow", "OPEN"))
-
-
