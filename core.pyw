@@ -308,7 +308,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_button_open(self):
         global struct_file
-        tmp = QFileDialog.getOpenFileName()
+        tmp = QFileDialog.getOpenFileName(filter=struct_file)
         struct_file = tmp[0]
         self.load_file()
 
