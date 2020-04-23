@@ -362,6 +362,17 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
+   <zorder>groupBox</zorder>
+   <zorder>groupBox_2</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>textBrowser</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>pushButton_4</zorder>
+   <zorder>textBrowser_2</zorder>
+   <zorder>textBrowser_3</zorder>
+   <zorder>label_5</zorder>
+   <zorder>progressBar</zorder>
+   <zorder>pushButton_5</zorder>
   </widget>
  </widget>
  <resources/>
