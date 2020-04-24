@@ -348,7 +348,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         for it in itms2:
             # print('selected item index found at %s with data: %s' % (it.row(), it.data()))
             data_sessions_print[int(it.row())] = "1"
-        if itms2 == 0:
+        if len(itms2) == 0:
             self.label_5.setText('nothing selected in session list ')
             return
 
