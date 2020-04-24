@@ -9,7 +9,7 @@ from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import pyqtSlot
 from analyzer import Ui_MainWindow
-from xlsxwriter import Workbook  # before import xlswriter
+from xlsxwriter import Workbook  # before import xlsxwriter
 from os import path
 import struct
 import math
@@ -207,7 +207,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                         if byte_arr[c] == 0x09:
                             break
                         char_id += chr(byte_arr[c])
-                    # Received issues that russian symbols is represend as kryakozyabry
+                    # Received issues that russian symbols is represent as kryakozyabry
                     # Here is solving
                     encoded_string = str(char_id.encode('utf-8'), encoding='cp866')
                     if not char_id.isascii(): # If not only ascii then copy every second symbol
@@ -305,23 +305,23 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
             select += 1
             self.label_4.setText("Selected: %d of %d" % (select, max_sessions))
 
-    @pyqtSlot()
+    @pyqtSlot(name='on_button_open')
     def on_button_open(self):
         global struct_file
         tmp = QFileDialog.getOpenFileName(filter=struct_file)
         struct_file = tmp[0]
         self.load_file()
 
-    @pyqtSlot()
+    @pyqtSlot(name='on_list_all')
     def on_list_all(self):
         self.listView.selectAll()
 
-    @pyqtSlot()
+    @pyqtSlot(name='on_list_clear')
     def on_list_clear(self):
         self.listView.clearSelection()
         self.listView_2.clearSelection()
 
-    @pyqtSlot()
+    @pyqtSlot(name='on_list_clicked')
     def on_list_clicked(self):
         global data_print
         global data_sessions_print
