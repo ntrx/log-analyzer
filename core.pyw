@@ -385,21 +385,26 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
 
         # Поиск выбранных строк в панелях
         itms = self.listView.selectedIndexes()
+        # выделенная строка имеет значение 1 в массиве (строковое)
         for it in itms:
             # print('selected item index found at %s with data: %s' % (it.row(), it.data()))
             data_print[int(it.row())] = "1"
+        # когда ничего не выбрано
         if len(itms) == 0:
             self.label_5.setText('nothing selected in data types list')
             return
 
         itms2 = self.listView_2.selectedIndexes()
+        # выделенная строка имеет значение 1 в массиве (строковое)
         for it in itms2:
             # print('selected item index found at %s with data: %s' % (it.row(), it.data()))
             data_sessions_print[int(it.row())] = "1"
+        # когда ничего не выбрано
         if len(itms2) == 0:
             self.label_5.setText('nothing selected in session list ')
             return
 
+        # вывод в консоль, просто так, чтобы понимать где ты(я)
         print("hello, its me")
 
         row = 0
