@@ -407,6 +407,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
         # вывод в консоль, просто так, чтобы понимать где ты(я)
         print("hello, its me")
 
+        # запись в таблицу Excel имен переменных
         row = 0
         for rw_ind in range(dt_ind):
             if data_print[rw_ind] == '1':
@@ -414,10 +415,12 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                 wsheet.set_column(row, row, len(str(data_name[rw_ind]))+1)
                 row += 1
         if data_print[0] == '1':
+            # размер первой колонки
             wsheet.set_column(0, 0, 6)  # first 10601
         wsheet.freeze_panes(1, 0)  # freeze first row
 
         row = 1
+        # количество сессий, если не максимальное
         xlsx_write = (sessions_n + 1) if (sessions_n + 1) < max_sessions else max_sessions
 
         choosed_records = 0
@@ -426,6 +429,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                 choosed_records += int(data_values_sessions[i][1])-int(data_values_sessions[i][0])
         print("Records choosed for convert: ", choosed_records)
 
+        # запись данных в таблицу
         record_counter = 0
         for i in range(xlsx_write):
             for cl_ind in range(int(data_values_sessions[i][0]), int(data_values_sessions[i][1])):
@@ -436,6 +440,7 @@ class MainWindow(QtWidgets. QMainWindow, Ui_MainWindow):
                         if data_print[rw_ind] == '1':
                             wsheet.write(row, col, data_values[cl_ind][rw_ind])
                             col += 1
+                            # визуализация процесса
                             self.progressBar.setValue(int((int(record_counter)/choosed_records)*100))
                     row += 1
         self.label_5.setVisible(True)
