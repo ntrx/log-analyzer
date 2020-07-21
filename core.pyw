@@ -17,8 +17,8 @@ from datetime import datetime
 from typing import Final  # C-like const variable
 
 PROG_NAME = "Log Analyzer"
-VERSION = "1.3.1"
-RELEASE = "rc3"
+VERSION = "1.3.2"
+RELEASE = " "
 
 _HEADER_SIZE_: Final[int] = 16  # Размер заголовка в файле (байтов)
 _HEADER_RECORDS_SIZE_: Final[int] = 16  # Размер строки с количеством записей у файле
